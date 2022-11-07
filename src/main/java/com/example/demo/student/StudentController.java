@@ -1,6 +1,7 @@
 package com.example.demo.student;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +23,9 @@ public class StudentController {
     }
 
     @PostMapping
-    public void registerNewStudent(@RequestBody Student student){
-        studentService.addNewStudent(student);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Student registerNewStudent(@RequestBody Student student){
+        return studentService.addNewStudent(student);
     }
 
     @DeleteMapping(path = "{studentId}")
